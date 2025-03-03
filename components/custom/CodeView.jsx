@@ -74,9 +74,15 @@ function CodeView() {
     setLoading(true);
     const PROMPT = JSON.stringify(messages) + ' ' + Prompt.CODE_GEN_PROMPT;
     console.log({ PROMPT });
-    const result = await axios.post('/api/gen-ai-code', {
-      prompt: PROMPT,
-    });
+    const result = await axios.post('/api/gen-ai-code', 
+      {
+        prompt: PROMPT,
+      }, 
+      {
+        timeout: 1000000, // Timeout set to 10 seconds (10,000 ms)
+      }
+    );
+    
 
     console.log(result?.data);
     const aiResp = result.data;
